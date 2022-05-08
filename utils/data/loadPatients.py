@@ -1,7 +1,9 @@
+import os
 
 def getPatieents():
+    print(os.getcwd())
     # UPdate
-    filePatient = r"..\..\parametersData\meta_data_covid_mini.csv"
+    filePatient = r"..\parametersData\meta_data_covid_mini.csv"
     # Test
     # filePatient = r".\parametersData\meta_data_covid_mini.csv"
     patients = []
