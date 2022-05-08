@@ -12,8 +12,13 @@ from ..model.All import All
 
 def mainboard(UserName):
 
-    file = r"./parametersData/LungSlides"
-    saveRoot = r'./result/ModelResult'
+    # OnLine
+    file = r"../../parametersData/LungSlides"
+    saveRoot = r'../../result/ModelResult'
+    # test
+    # file = r"./parametersData/LungSlides"
+    # saveRoot = r'./result/ModelResult'
+
     listFile = []
     patientsInfo = {}
     optionx = "option"

@@ -1,7 +1,9 @@
 
 def getPatieents():
-
-    filePatient = r".\parametersData\meta_data_covid_mini.csv"
+    # UPdate
+    filePatient = r"..\..\parametersData\meta_data_covid_mini.csv"
+    # Test
+    # filePatient = r".\parametersData\meta_data_covid_mini.csv"
     patients = []
     patientsID = []
     patientsFile = {}
