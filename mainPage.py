@@ -17,6 +17,15 @@ class MultiApp:
         self.apps.append({"title": title, "function": func})
 
     def run(self):
+        nowFile = os.getcwd()
+        patientsFile = r"parametersData/meta_data_covid_mini.csv"
+        imageFile =  r"parametersData/LungSlides"
+        saveRoot = r'result/ModelResult'
+
+        patientsFile = os.path.join(nowFile,patientsFile)
+        imageFile = os.path.join(nowFile,imageFile)
+        saveRoot = os.path.join(nowFile,saveRoot)
+
         img = Image.open(
             r"./img/person - 192x192.png"
         )
@@ -49,7 +58,7 @@ class MultiApp:
                 "Select Page", self.apps, format_func=lambda app: app["title"]
             )
             st.sidebar.markdown("---")
-            appx["function"](uid)
+            appx["function"](patientsFile,imageFile,saveRoot)
 
 
 app = MultiApp()

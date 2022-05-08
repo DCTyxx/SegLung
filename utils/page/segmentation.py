@@ -10,14 +10,10 @@ from ..model.DeepLabV3Plus import DeeplabV3Ppredict
 from ..model.All import All
 
 
-def mainboard(UserName):
+def mainboard(patientsFile,imageFile,saveRoot):
 
-    # OnLine
-    file = r"../../parametersData/LungSlides"
-    saveRoot = r'../../result/ModelResult'
-    # test
-    # file = r"./parametersData/LungSlides"
-    # saveRoot = r'./result/ModelResult'
+    file = imageFile
+    saveRoot = saveRoot
 
     listFile = []
     patientsInfo = {}
@@ -47,7 +43,7 @@ def mainboard(UserName):
     with st.container():
         col1c, col2c, col4c = st.columns(3)
         with col1c:
-            patients, patientsID, patientsFile,patientsMap = loadPatients.getPatieents()
+            patients, patientsID, patientsFile,patientsMap = loadPatients.getPatieents(patientsFile)
             # pop(0) 为标题，可以省略
             patientsID.pop(0)
             patientsIDtuple = tuple(patientsID)
