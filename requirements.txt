@@ -1,0 +1,5 @@
+opencv-python
+onnxruntime
+pandas
+streamlit
+matplotlib
