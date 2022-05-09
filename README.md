@@ -4,7 +4,7 @@
 This project is aimed to provide a auto-segmentation system of COVID-19. Click here to create your first project(https://share.streamlit.io/dctyxx/seglung/mainPage.py
 )
  
-## BUilt with
+## Built with
 - [Streamlit](https://streamlit.io/)
 
 
