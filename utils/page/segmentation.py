@@ -173,11 +173,11 @@ def mainboard(patientsFile,imageFile,saveRoot):
         col1, col2 = st.columns([8, 2])
         with col1:
             raw_imageList = []
-            if len(listFile)>6:
+            if len(listFile)>5:
                 values = st.slider(
                     'Select a range of slides',
-                    min_value=1, max_value=len(listFile), value = 6,step=1)
-                if values<6:
+                    min_value=1, max_value=len(listFile), value = 5,step=1)
+                if values<5:
                     for i in range(0, int(values)):
                         fileImg = os.path.join(file, listFile[i])
                         raw_image = cv.imread(fileImg, 0)
