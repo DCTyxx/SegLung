@@ -9,7 +9,6 @@ import os
 from utils.page.segmentation import mainboard
 from utils.page.pdb_page import search_PDB
 
-
 class MultiApp:
     def __init__(self):
         self.apps = []
