@@ -201,6 +201,6 @@ def mainboard(patientsFile,imageFile,saveRoot):
 
     with st.container():
         pass
-        txt = st.text_area('输入病例报告')
+        txt = st.text_area('//////')
         st.button("输入")
         st.button("清除")
