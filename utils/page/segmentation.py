@@ -185,7 +185,7 @@ def mainboard(patientsFile,imageFile,saveRoot):
                         raw_imageList.append(raw_image)
                     st.image(raw_imageList, use_column_width='auto')
                 else:
-                    for i in range(int(values-6), int(values)):
+                    for i in range(int(values-5), int(values)):
                         if i>len(listFile)-1:
                             break
                         fileImg = os.path.join(file, listFile[i])
