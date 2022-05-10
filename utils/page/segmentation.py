@@ -2,14 +2,11 @@ import os.path
 
 import streamlit as st
 import cv2 as cv
-from PIL import Image
-import pathlib
-from ..juxtapose.Use import juxtapose
+from ..juxtapose.Use import superView
 from ..data import loadPatients
 from ..model.InfNet import InfNetpredict
 from ..model.UNet import UNetpredict
 from ..model.DeepLabV3Plus import DeeplabV3Ppredict
-from ..model.All import All
 
 
 
@@ -35,14 +32,12 @@ def mainboard(patientsFile,imageFile,saveRoot):
 
     genre = st.sidebar.radio(
         label="Select the view",
-        options=('Traditional', 'Super View'),
+        options=('Super View','Traditional View'),
         index=0
     )
 
 
-
     # 主面板界面
-
     with st.container():
         col1c, col2c, col4c = st.columns(3)
         with col1c:
@@ -57,14 +52,15 @@ def mainboard(patientsFile,imageFile,saveRoot):
             listFile = patientsFile[optionx]
             patientsInfo= patientsMap[optionx]
 
+
         with col2c:
             listFiletuple = tuple(listFile)
             option = st.selectbox(
                 "Slides ID",
                 listFiletuple
             )
-
-
+            nameImage1 = option.split(".")[0]+"1.png"
+            nameImage2 = option.split(".")[0]+"2.png"
             fileImg = os.path.join(file, option)
             saveRoot = os.path.join(saveRoot, option)
             # 打开文件
@@ -88,6 +84,8 @@ def mainboard(patientsFile,imageFile,saveRoot):
     # with st.container():
     #     # TODO 展示用户各类信息
 
+
+
     if genre == 'Traditional':
         with st.container():
             col1, col2 = st.columns([8, 2])
@@ -99,7 +97,6 @@ def mainboard(patientsFile,imageFile,saveRoot):
         with st.container():
             col1, col2, col3= st.columns([4, 4, 2])
             with col1:
-
                 st.image(raw_image, caption="raw slides")
 
             with col2:
@@ -131,20 +128,21 @@ def mainboard(patientsFile,imageFile,saveRoot):
 
     if genre == 'Super View':
         with st.container():
-            col1, col3 = st.columns([8, 2])
+            col1, col2 = st.columns([8, 2])
             with col1:
-                IMG1 = "img1.png"
-                IMG2 = "img2.png"
-                STREAMLIT_STATIC_PATH = (
-                    pathlib.Path(st.__path__[0]) / "static"
-                )
-                Image1 = Image.fromarray(cv.cvtColor(raw_image, cv.COLOR_GRAY2RGB))
-                Image2 = Image.fromarray(cv.cvtColor(segmented_img, cv.COLOR_BGR2RGB))
-                Image1.save(STREAMLIT_STATIC_PATH / IMG1)
-                Image2.save(STREAMLIT_STATIC_PATH / IMG2)
-                juxtapose(IMG1,IMG2)
+                st.subheader("Raw and Segmentation")
+            with col2:
+                st.subheader("Information")
 
-            with col3:
+
+        with st.container():
+            col1, col2 = st.columns([8, 2])
+            with col1:
+                nameImage1 = network["title"] + nameImage1
+                nameImage2 = network["title"] + nameImage2
+                superView(raw_image,segmented_img,nameImage1,nameImage2)
+
+            with col2:
                 # TODO 更改为显示用户资料
                 # 3,4,5,6,11,17位
                 # Gender\Age\Country\Diagnosis\Date\Institution
@@ -173,11 +171,11 @@ def mainboard(patientsFile,imageFile,saveRoot):
         col1, col2 = st.columns([8, 2])
         with col1:
             raw_imageList = []
-            if len(listFile)>5:
+            if len(listFile)>6:
                 values = st.slider(
                     'Select a range of slides',
-                    min_value=1, max_value=len(listFile), value = 5,step=1)
-                if values<5:
+                    min_value=1, max_value=len(listFile), value = 6,step=1)
+                if values<6:
                     for i in range(0, int(values)):
                         fileImg = os.path.join(file, listFile[i])
                         raw_image = cv.imread(fileImg, 0)
@@ -185,7 +183,7 @@ def mainboard(patientsFile,imageFile,saveRoot):
                         raw_imageList.append(raw_image)
                     st.image(raw_imageList, use_column_width='auto')
                 else:
-                    for i in range(int(values-5), int(values)):
+                    for i in range(int(values-6), int(values)):
                         if i>len(listFile)-1:
                             break
                         fileImg = os.path.join(file, listFile[i])
