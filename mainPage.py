@@ -7,6 +7,7 @@ from PIL import Image
 from utils.data.readUserList import read
 import os
 from utils.page.segmentation import mainboard
+from utils.page.pdb_page import search_PDB
 
 
 class MultiApp:
@@ -65,7 +66,7 @@ app = MultiApp()
 
 app.add_app("Segmentation", mainboard)
 # app.add_app("Database Overview", overview_page)
-# app.add_app("Search PDB", pdb_page)
+app.add_app("Search PDB", search_PDB)
 # app.add_app("Explore Conformations", conformation_page)
 # app.add_app("Analyze Mutations", mutation_page)
 # app.add_app("Compare Inhibitors", inhibitor_page)

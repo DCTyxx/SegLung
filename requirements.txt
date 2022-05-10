@@ -2,4 +2,5 @@ opencv-python-headless
 onnxruntime
 pandas
 streamlit
+streamlit-aggrid
 matplotlib

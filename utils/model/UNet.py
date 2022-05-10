@@ -7,6 +7,8 @@ class ONNXModelUNet():
     def __init__(self):
         onnx_path = r'./modelParameters/UNet1_14_110352.onnx'
         self.onnx_session = onnxruntime.InferenceSession(onnx_path)
+        # 服务器版本 self.onnx_session = onnxruntime.InferenceSession(onnx_path)
+        # CPU版本 self.onnx_session = onnxruntime.InferenceSession(onnx_path, providers='CPUExecutionProvider')
         self.input_name = self.get_input_name(self.onnx_session)
         self.output_name = self.get_output_name(self.onnx_session)
         print("input_name:{}".format(self.input_name))
