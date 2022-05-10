@@ -1,5 +1,5 @@
 import streamlit as st
-from st_aggrid import AgGrid
+# from st_aggrid import AgGrid
 import pandas as pd
 import functools
 from PIL import Image

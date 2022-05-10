@@ -2,12 +2,15 @@ import os.path
 
 import streamlit as st
 import cv2 as cv
+from PIL import Image
+import pathlib
 from ..juxtapose.Use import juxtapose
 from ..data import loadPatients
 from ..model.InfNet import InfNetpredict
 from ..model.UNet import UNetpredict
 from ..model.DeepLabV3Plus import DeeplabV3Ppredict
 from ..model.All import All
+
 
 
 def mainboard(patientsFile,imageFile,saveRoot):
@@ -68,6 +71,7 @@ def mainboard(patientsFile,imageFile,saveRoot):
             raw_image = cv.imread(fileImg, 0)
             # 预测
             segmented_img = network["function"](image=raw_image, saveRoot=saveRoot)
+            raw_image = cv.resize(raw_image, (800, 800), interpolation=cv.INTER_LINEAR)
 
 
         # TODO 修改为过往病例查看文件树
@@ -95,7 +99,7 @@ def mainboard(patientsFile,imageFile,saveRoot):
         with st.container():
             col1, col2, col3= st.columns([4, 4, 2])
             with col1:
-                raw_image = cv.resize(raw_image, (800, 800), interpolation=cv.INTER_LINEAR)
+
                 st.image(raw_image, caption="raw slides")
 
             with col2:
@@ -105,7 +109,6 @@ def mainboard(patientsFile,imageFile,saveRoot):
                 # TODO 更改为显示用户资料
                 #3,4,5,6,11,17位
                 #Gender\Age\Country\Diagnosis\Date\Institution
-
                 #取得：{"Gender":inf[3],"Age":inf[4],"Country":inf[5],"Diagnosis":inf[6],"Date":inf[7],"Institution":inf[17]}
                 Gender = patientsInfo["Gender"]
                 Age = patientsInfo["Age"]
@@ -121,11 +124,6 @@ def mainboard(patientsFile,imageFile,saveRoot):
                 st.write("Institution : " + Institution)
                 st.markdown("---")
                 # txt = st.text_area(label="Input diagnose report",height=200)
-
-
-
-
-
         st.markdown("---")
 
 
@@ -133,27 +131,37 @@ def mainboard(patientsFile,imageFile,saveRoot):
 
     if genre == 'Super View':
         with st.container():
-            col1, col3, col4 = st.columns([8, 1, 1])
+            col1, col3 = st.columns([8, 2])
             with col1:
-                juxtapose(raw_image,segmented_img)
+                IMG1 = "img1.png"
+                IMG2 = "img2.png"
+                STREAMLIT_STATIC_PATH = (
+                    pathlib.Path(st.__path__[0]) / "static"
+                )
+                Image1 = Image.fromarray(cv.cvtColor(raw_image, cv.COLOR_GRAY2RGB))
+                Image2 = Image.fromarray(cv.cvtColor(segmented_img, cv.COLOR_BGR2RGB))
+                Image1.save(STREAMLIT_STATIC_PATH / IMG1)
+                Image2.save(STREAMLIT_STATIC_PATH / IMG2)
+                juxtapose(IMG1,IMG2)
 
             with col3:
-                st.header(" ")
-                raw_imageList = []
-                for i in range(1, int(len(listFile) / 2)):
-                    fileImg = os.path.join(file, listFile[i])
-                    raw_image = cv.imread(fileImg, 0)
-                    raw_image = cv.resize(raw_image, (70, 70))
-                    raw_imageList.append(raw_image)
-                st.image(raw_imageList)
-
-            with col4:
-                st.header(" ")
-                for i in range(int(len(listFile) / 2), len(listFile)):
-                    fileImg = os.path.join(file, listFile[i])
-                    raw_image = cv.imread(fileImg, 0)
-                    raw_image = cv.resize(raw_image, (70, 70))
-                    st.image(raw_image)
+                # TODO 更改为显示用户资料
+                # 3,4,5,6,11,17位
+                # Gender\Age\Country\Diagnosis\Date\Institution
+                # 取得：{"Gender":inf[3],"Age":inf[4],"Country":inf[5],"Diagnosis":inf[6],"Date":inf[7],"Institution":inf[17]}
+                Gender = patientsInfo["Gender"]
+                Age = patientsInfo["Age"]
+                Country = patientsInfo["Country"]
+                Diagnosis = patientsInfo["Diagnosis"]
+                Date = patientsInfo["Date"]
+                Institution = patientsInfo["Institution"]
+                st.write("Gender : " + Gender)
+                st.write("Age : " + Age)
+                st.write("Country : " + Country)
+                st.write("Diagnosis : " + Diagnosis)
+                st.write("Date : " + Date)
+                st.write("Institution : " + Institution)
+                st.markdown("---")
 
 
     # TODO 将图像链接由静态改为动态
