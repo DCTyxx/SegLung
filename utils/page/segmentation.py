@@ -37,6 +37,7 @@ def mainboard(patientsFile,imageFile,saveRoot):
     )
 
 
+
     # 主面板界面
     with st.container():
         col1c, col2c, col4c = st.columns(3)
@@ -86,7 +87,7 @@ def mainboard(patientsFile,imageFile,saveRoot):
 
 
 
-    if genre == 'Traditional':
+    if genre == 'Traditional View':
         with st.container():
             col1, col2 = st.columns([8, 2])
             with col1:

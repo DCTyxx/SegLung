@@ -1,4 +1,5 @@
 "index,File name,Patient ID,Gender,Age,Country,Diagnosis,Slice,Case Discussion,Case Number,Columns,Date,Date of Last Calibration,Distance Source to Detector,Distance Source to Patient,Exposure Time,Image Source,Institution,KVP,Last Calibration,Link,Link2,Other diseases,Presentation,RT_PCR_COVID-19,Rows,Severity,Slice Thickness,Slices,Source_detail,Time,XRayTubeCurrent,category,doi,finding,in_icu,intubated,intubation_present,license,mAs,mask_file,needed_supplemental_O2,study_file,survival,went_icu"
+"121,6_Rahimzadeh_137covid_patient16_SR_4_IM00019.png,patient16,M,40,Iran,COVID-19,19,,,,20200404,,,,,,Negin radiology located at Sari,,,,,,,,,,,,,,,,,,,,,,,,,,,"
 "0,6_Rahimzadeh_137covid_patient101_SR_4_IM00006.png,patient101,F,51,Iran,COVID-19,6,,,,20200328,,,,,,Negin radiology located at Sari,,,,,,,,,,,,,,,,,,,,,,,,,,,"
 "1,6_Rahimzadeh_137covid_patient101_SR_4_IM00008.png,patient101,F,51,Iran,COVID-19,8,,,,20200328,,,,,,Negin radiology located at Sari,,,,,,,,,,,,,,,,,,,,,,,,,,,"
 "2,6_Rahimzadeh_137covid_patient101_SR_4_IM00009.png,patient101,F,51,Iran,COVID-19,9,,,,20200328,,,,,,Negin radiology located at Sari,,,,,,,,,,,,,,,,,,,,,,,,,,,"
@@ -120,7 +121,6 @@
 "118,6_Rahimzadeh_137covid_patient15_SR_4_IM00013.png,patient15,F,69,Iran,COVID-19,13,,,,20200327,,,,,,Negin radiology located at Sari,,,,,,,,,,,,,,,,,,,,,,,,,,,"
 "119,6_Rahimzadeh_137covid_patient15_SR_4_IM00014.png,patient15,F,69,Iran,COVID-19,14,,,,20200327,,,,,,Negin radiology located at Sari,,,,,,,,,,,,,,,,,,,,,,,,,,,"
 "120,6_Rahimzadeh_137covid_patient15_SR_4_IM00015.png,patient15,F,69,Iran,COVID-19,15,,,,20200327,,,,,,Negin radiology located at Sari,,,,,,,,,,,,,,,,,,,,,,,,,,,"
-"121,6_Rahimzadeh_137covid_patient16_SR_4_IM00019.png,patient16,M,40,Iran,COVID-19,19,,,,20200404,,,,,,Negin radiology located at Sari,,,,,,,,,,,,,,,,,,,,,,,,,,,"
 "122,6_Rahimzadeh_137covid_patient16_SR_4_IM00020.png,patient16,M,40,Iran,COVID-19,20,,,,20200404,,,,,,Negin radiology located at Sari,,,,,,,,,,,,,,,,,,,,,,,,,,,"
 "123,6_Rahimzadeh_137covid_patient16_SR_4_IM00021.png,patient16,M,40,Iran,COVID-19,21,,,,20200404,,,,,,Negin radiology located at Sari,,,,,,,,,,,,,,,,,,,,,,,,,,,"
 "124,6_Rahimzadeh_137covid_patient16_SR_4_IM00022.png,patient16,M,40,Iran,COVID-19,22,,,,20200404,,,,,,Negin radiology located at Sari,,,,,,,,,,,,,,,,,,,,,,,,,,,"
