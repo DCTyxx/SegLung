@@ -7,8 +7,16 @@ from ..data import loadPatients
 from ..model.InfNet import InfNetpredict
 from ..model.UNet import UNetpredict
 from ..model.DeepLabV3Plus import DeeplabV3Ppredict
+from ..functions.get3DSlides import buildPdbPage
 
-
+def getAllSildes(listFile,file):
+    raw_imageList = []
+    for i in range(0, int(len(listFile))):
+        fileImg = os.path.join(file, listFile[i])
+        raw_image = cv.imread(fileImg, 0)
+        raw_image = cv.resize(raw_image, (150, 150))
+        raw_imageList.append(raw_image)
+    return raw_imageList
 
 def mainboard(patientsFile,imageFile,saveRoot):
 
@@ -52,6 +60,9 @@ def mainboard(patientsFile,imageFile,saveRoot):
             )
             listFile = patientsFile[optionx]
             patientsInfo= patientsMap[optionx]
+            # load all the slides about this patient
+            raw_imageList = getAllSildes(listFile, file)
+            page = buildPdbPage(raw_imageList)
 
 
         with col2c:
@@ -104,6 +115,10 @@ def mainboard(patientsFile,imageFile,saveRoot):
                 st.image(segmented_img, caption="segmented slides")
 
             with col3:
+                # TODO 加上三维显示模块
+                # Plot!
+                st.plotly_chart(page, use_container_width=False)
+
                 # TODO 更改为显示用户资料
                 #3,4,5,6,11,17位
                 #Gender\Age\Country\Diagnosis\Date\Institution
@@ -144,6 +159,8 @@ def mainboard(patientsFile,imageFile,saveRoot):
                 superView(raw_image,segmented_img,nameImage1,nameImage2)
 
             with col2:
+                # TODO 加上三维显示模块
+                st.plotly_chart(page, use_container_width=False)
                 # TODO 更改为显示用户资料
                 # 3,4,5,6,11,17位
                 # Gender\Age\Country\Diagnosis\Date\Institution
@@ -201,9 +218,6 @@ def mainboard(patientsFile,imageFile,saveRoot):
                     raw_imageList.append(raw_image)
                 st.image(raw_imageList, use_column_width='auto')
         st.markdown("---")
-
-
-
     # TODO 风琴箱图
 
     with st.container():
