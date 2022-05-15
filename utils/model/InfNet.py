@@ -75,5 +75,5 @@ def InfNetpredict(image,saveRoot):
     file = r"D:\Project\CTcutsByStreamlit\GUI3\result\ModelResult\1.png"
     cv.imwrite(saveRoot,resultA)
 
-    resultReshape = cv.resize(resultA, (800, 800), interpolation=cv.INTER_LINEAR)
+    resultReshape = cv.resize(resultA, (1000, 1000), interpolation=cv.INTER_LINEAR)
     return resultReshape

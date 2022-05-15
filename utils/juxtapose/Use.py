@@ -4,7 +4,7 @@ from PIL import Image
 import pathlib
 import streamlit as st
 
-def superView(raw_image,segmented_img,IMG1,IMG2,height: int = 800):
+def superView(raw_image,segmented_img,IMG1,IMG2,height: int = 1000):
     cdn_path = "https://cdn.knightlab.com/libs/juxtapose/latest"
     css_block = f'<link rel="stylesheet" href="{cdn_path}/css/juxtapose.css">'
     js_block = f'<script src="{cdn_path}/js/juxtapose.min.js"></script>'

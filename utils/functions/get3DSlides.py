@@ -2,6 +2,7 @@ import numpy as np
 import plotly.graph_objects as go
 
 def buildPdbPage(volume):
+    volume.reverse()
     r, c = volume[0].shape
     lenImage = len(volume)
     zLen = (lenImage-1)/10
@@ -85,6 +86,6 @@ def buildPdbPage(volume):
         margin_l=0,
         margin_t = 0,
         margin_r = 0,
-
     )
+
     return fig
