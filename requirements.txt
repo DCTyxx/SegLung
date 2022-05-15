@@ -6,3 +6,4 @@ streamlit-aggrid
 matplotlib
 plotly
 streamlit-drawable-canvas
+numpy
