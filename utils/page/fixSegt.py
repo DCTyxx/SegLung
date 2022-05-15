@@ -30,7 +30,7 @@ def fixResult(raw_imagex,pre_imagex,file):
 
             stroke_color = st.sidebar.color_picker("Stroke color hex: ","#ffffff")
             bg_color = st.sidebar.color_picker("Background color hex: ", "#000000")
-            realtime_update = st.sidebar.checkbox("Update in realtime", True)
+            realtime_update = st.sidebar.checkbox("Update in realtime", False)
 
             # Create a canvas component
             canvas_result = streamlit_drawable_canvas.st_canvas(
