@@ -158,11 +158,11 @@ def st_canvas(
         key=key,
         default=None,
     )
-    if component_value is None:
-        return CanvasResult
+    # if component_value is None:
+    #     return CanvasResult
 
     return CanvasResult(
         # np.asarray(_data_url_to_image(component_value["data"])),
-        np.array(background_image),
-        component_value["raw"],
+        image_data = np.array(background_image),
+        json_data = component_value["raw"],
     )
