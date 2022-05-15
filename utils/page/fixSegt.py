@@ -1,13 +1,15 @@
 import streamlit as st
-import streamlit_drawable_canvas
 import cv2 as cv
 from PIL import Image
 import numpy as np
 
+# import streamlit_drawable_canvas
+from ..sdcd import streamlit_drawable_canvas
+
+
 def fixResult(raw_imagex,pre_imagex,file):
     with st.container():
         # st.header("Others")
-
         col1, col2 = st.columns([5, 5])
         raw_image = Image.fromarray(cv.cvtColor(raw_imagex, cv.COLOR_BGR2RGB))
         pre_image = Image.fromarray(cv.cvtColor(pre_imagex, cv.COLOR_BGR2RGB))
@@ -15,7 +17,6 @@ def fixResult(raw_imagex,pre_imagex,file):
         pre = streamlit_drawable_canvas._resize_img(pre_image, new_height=600, new_width=600)
         with col1:
 
-            streamlit_drawable_canvas._RELEASE = False
 
             # Specify canvas parameters in application
             drawing_mode = st.sidebar.selectbox(
