@@ -5,6 +5,9 @@ def read(file,name):
     for i in range(len(csvframe)):
         if str(csvframe['name'][i]) == name:
 
+            """
+            TODO: 返回UID对应的password
+            """
             return str(csvframe['password'][i])
 
 

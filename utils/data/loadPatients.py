@@ -24,6 +24,13 @@ def getPatieents(patientsFile):
                 patientsMap[inf[2]]={"Gender":inf[3],"Age":inf[4],"Country":inf[5],"Diagnosis":inf[6],"Date":inf[11],"Institution":inf[17]}
 
             # 记录每一个病人的信息与地址
+    # TODO 返回为patients，patientsID,patientsFile,patientsMap
+    """
+    patients:list, contain all information about patients
+    patientsID:list ,contain all patients ID
+    patientsFile:map{list}, s.t.{ID:[file1,file2,file3,file4]} each value contain all lung slides about key
+    patientsMap:map{map} s.t.{ID:{"Gender":inf,"Age":inf,"Country":inf,"Diagnosis":inf,"Date":inf,"Institution":inf}}
+    """
     return patients,patientsID,patientsFile,patientsMap
 
 

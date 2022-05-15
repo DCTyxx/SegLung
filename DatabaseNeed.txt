@@ -1,0 +1,10 @@
+1、 utils/data/readUserList.py，
+    utils/data/recordUserList.py，
+    utils/data/loadPatients.py
+    需要重写，返回值类型不变。
+
+2、UserData下userList.csv需要上传数据库
+
+3、parametersData下meta_data_covid_mini.csv需要上传数据库
+
+4、构建userData与parametersData之间的关系
