@@ -6,3 +6,4 @@ streamlit-aggrid
 matplotlib
 plotly
 numpy
+streamlit_drawable_canvas==0.8.0

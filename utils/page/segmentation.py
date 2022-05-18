@@ -236,4 +236,4 @@ def mainboard(patientsFile,imageFile,saveRoot,fixFile):
 
     else:
         placeholder1.empty()
-        fixResult(fileImg,segmented_img,fixFile)
+        fixResult(raw_imagex,segmented_img,fixFile)
