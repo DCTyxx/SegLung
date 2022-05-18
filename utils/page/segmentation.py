@@ -93,7 +93,6 @@ def mainboard(patientsFile,imageFile,saveRoot,fixFile):
             #     "Patients Recode(Loading)",
             #     patientsIDtuple
             # )
-        st.markdown("---")
         # TODO 改为动态页面，即时得到病例报告
         # TODO 病例报告与病人资料同步更新
 

@@ -49,7 +49,7 @@ class MultiApp:
         if read(file=path, name=uid) == password:
             placeholder.empty()
             st.sidebar.markdown('## Wellcome Back ' + uid + ' , Have a Nice Day!')
-            st.markdown("---")
+            st.sidebar.markdown("---")
             st.markdown("## Main Menu")
             appx = st.sidebar.selectbox(
                 "Select Page", self.apps, format_func=lambda app: app["title"]
