@@ -7,13 +7,12 @@ import numpy as np
 from ..sdcd import streamlit_drawable_canvas
 
 
-def fixResult(raw_imagex,pre_imagex,file):
+def fixResult(raw_image_file,pre_imagex,file):
     with st.container():
         # st.header("Others")
         col1, col2 = st.columns([5, 5])
-        raw_image = Image.fromarray(cv.cvtColor(raw_imagex, cv.COLOR_BGR2RGB))
+
         pre_image = Image.fromarray(cv.cvtColor(pre_imagex, cv.COLOR_BGR2RGB))
-        img = streamlit_drawable_canvas._resize_img(raw_image,new_height= 600, new_width= 600)
         pre = streamlit_drawable_canvas._resize_img(pre_image, new_height=600, new_width=600)
         with col1:
 
@@ -39,7 +38,7 @@ def fixResult(raw_imagex,pre_imagex,file):
                 stroke_width=stroke_width if drawing_mode == 'polygon'else 0,
                 stroke_color=stroke_color,
                 background_color=bg_color,
-                background_image=img,
+                background_image=Image.open(raw_image_file),
                 update_streamlit=realtime_update,
                 height=600,
                 width = 600,
