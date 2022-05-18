@@ -45,7 +45,7 @@ def _data_url_to_image(data_url: str) -> Image:
     return Image.open(io.BytesIO(base64.b64decode(_data_url)))
 
 
-def _resize_img(img: Image, new_height: int = 700, new_width: int = 700) -> Image:
+def _resize_img(img: Image, new_height: int = 600, new_width: int = 600) -> Image:
     """Resize the image to the provided resolution."""
     h_ratio = new_height / img.height
     w_ratio = new_width / img.width
@@ -60,7 +60,7 @@ def st_canvas(
     background_color: str = "",
     background_image: Image = None,
     update_streamlit: bool = True,
-    height: int = 400,
+    height: int = 600,
     width: int = 600,
     drawing_mode: str = "freedraw",
     initial_drawing: dict = None,
@@ -127,9 +127,9 @@ def st_canvas(
         # background_image_url = st.image(background_image)
 
         background_image_url = st_image.image_to_url(
-
             background_image, width, True, "RGB", "PNG", f"drawable-canvas-bg-{md5(background_image.tobytes()).hexdigest()}-{key}"
         )
+
         # on a dev environment, tell React to fetch image from Streamlit server
         # on a build environment, the URL hosts are the same
         if not _RELEASE:
@@ -158,11 +158,10 @@ def st_canvas(
         key=key,
         default=None,
     )
-    # if component_value is None:
-    #     return CanvasResult
+    if component_value is None:
+        return CanvasResult
 
     return CanvasResult(
-        # np.asarray(_data_url_to_image(component_value["data"])),
-        image_data = np.array(background_image),
+        np.asarray(_data_url_to_image(component_value["data"])),
         json_data = component_value["raw"],
     )
