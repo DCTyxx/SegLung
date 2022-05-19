@@ -18,15 +18,6 @@ class MultiApp:
 
     def run(self):
         nowFile = os.getcwd()
-        patientsFile = r"parametersData/meta_data_covid_mini.csv"
-        imageFile =  r"parametersData/LungSlides"
-        saveRoot = r'result/ModelResult'
-        fixFile = r'result/FixResult'
-
-        patientsFile = os.path.join(nowFile,patientsFile)
-        imageFile = os.path.join(nowFile,imageFile)
-        saveRoot = os.path.join(nowFile,saveRoot)
-        fixFile = os.path.join(nowFile,fixFile)
 
         img = Image.open(
             r"./img/person - 192x192.png"
@@ -45,17 +36,18 @@ class MultiApp:
             st.markdown("---")
 
         path = os.path.join("./UserData/userList.csv")
-
-        if read(file=path, name=uid) == password:
+        passw,job,PatientsID = read(file=path, name=uid)
+        if passw == password:
             placeholder.empty()
-            st.sidebar.markdown('## Wellcome Back ' + uid + ' , Have a Nice Day!')
+            st.sidebar.markdown('## Wellcome Back ' + PatientsID + ' , Have a Nice Day!')
             st.sidebar.markdown("---")
             st.markdown("## Main Menu")
             appx = st.sidebar.selectbox(
                 "Select Page", self.apps, format_func=lambda app: app["title"]
             )
             st.sidebar.markdown("---")
-            appx["function"](patientsFile,imageFile,saveRoot,fixFile)
+            appx["function"](job,nowFile,PatientsID)
+
 
 
 app = MultiApp()

@@ -1,14 +1,16 @@
 import os.path
-
+import pandas as pd
 import streamlit as st
 import cv2 as cv
 from ..juxtapose.Use import superView
 from ..data import loadPatients
+from ..data import loadRecord
 from ..model.InfNet import InfNetpredict
 from ..model.UNet import UNetpredict
 from ..model.DeepLabV3Plus import DeeplabV3Ppredict
 from ..functions.get3DSlides import buildPdbPage
 from ..page.fixSegt import fixResult
+import time
 
 def getAllSildes(listFile,file):
     raw_imageList = []
@@ -19,10 +21,23 @@ def getAllSildes(listFile,file):
         raw_imageList.append(raw_image)
     return raw_imageList
 
-def mainboard(patientsFile,imageFile,saveRoot,fixFile):
+def mainboard(job,nowFile,PatientID):
+    patientsFile = r"parametersData/meta_data_covid_mini.csv"
+    imageFile = r"parametersData/LungSlides"
+    saveRoot = r'result/ModelResult'
+    fixFile = r'result/FixResult'
+    recordFile = r'UserData/userReport.csv'
 
-    file = imageFile
-    saveRoot = saveRoot
+    patientsFile = os.path.join(nowFile, patientsFile)
+    file = os.path.join(nowFile, imageFile)
+    saveRoot = os.path.join(nowFile, saveRoot)
+    fixFile = os.path.join(nowFile, fixFile)
+    recordFile = os.path.join(nowFile,recordFile)
+    hPatientsID, hPatientsReport = loadRecord.getRecord(recordFile)
+
+
+    csvframe = pd.read_csv(recordFile, names=['patientsID', 'report','Time','Doc'])
+
 
     listFile = []
     patientsInfo = {}
@@ -56,10 +71,21 @@ def mainboard(patientsFile,imageFile,saveRoot,fixFile):
             # pop(0) 为标题，可以省略
             patientsID.pop(0)
             patientsIDtuple = tuple(patientsID)
-            optionx = st.selectbox(
-                "Patients ID",
-                patientsIDtuple
-            )
+            if job==0:
+                optionx = st.selectbox(
+                    "Patients ID",
+                    patientsIDtuple
+                )
+            elif job==1:
+                optionx = st.selectbox(
+                    "Patients ID",
+                    hPatientsID
+                )
+            else:
+                optionx = PatientID
+                st.subheader("PatientID : "+optionx)
+
+
             listFile = patientsFile[optionx]
             patientsInfo= patientsMap[optionx]
             # load all the slides about this patient
@@ -88,11 +114,15 @@ def mainboard(patientsFile,imageFile,saveRoot,fixFile):
         # TODO 修改为过往病例查看文件树
         # TODO 病例编码
         with col4c:
-            result = st.checkbox("I think segmentation result is wrong", False)
-            # add_selectbox = st.selectbox(
-            #     "Patients Recode(Loading)",
-            #     patientsIDtuple
-            # )
+            if job==0:
+                result = st.checkbox("I think segmentation result is wrong", False)
+                ck = False
+            elif job==1:
+                result = False
+                ck = st.checkbox("I want to check diagnose report about this patient.", True)
+            else:
+                ck = False
+                result = False
         # TODO 改为动态页面，即时得到病例报告
         # TODO 病例报告与病人资料同步更新
 
@@ -101,6 +131,22 @@ def mainboard(patientsFile,imageFile,saveRoot,fixFile):
 
 
     if result==False:
+        if ck==True:
+            # show the diagnose report
+            # we have hPatientsID and hPatientsReport we can show information in the table
+            # show the 3 record recently
+            # dic = {}
+            # for i in range(len(hPatientsReport[optionx])):
+            #     dic[]
+            #
+            # st.table(data=None)
+            #
+            # if len(hPatientsReport[optionx]) > 3:
+            #     with st.expander("See explanation"):
+            #         st.table(data=None)
+            pass
+
+
         if genre == 'Traditional View':
             with st.container():
                 col1,col2, col3 = st.columns([5.5,2.5, 2])
@@ -226,12 +272,48 @@ def mainboard(patientsFile,imageFile,saveRoot,fixFile):
                     st.image(raw_imageList, use_column_width='auto')
             st.markdown("---")
         # TODO 风琴箱图
+        if job == 0:
+            with st.container():
+                placeholder2 = st.empty()
+                with placeholder2:
+                    txt = st.text_area('Enter your report',placeholder="Please input diagnose report about this patient.")
+                if st.button("Submit"):
+                    # record]
+                    t = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
-        with st.container():
-            pass
-            txt = st.text_area('Enter your report')
-            st.button("Submit")
-            st.button("Clear")
+                    frame = pd.DataFrame([[optionx, txt,t,PatientID]],columns=['patientsID', 'report','Time','Doc'])
+                    frame.to_csv(recordFile, mode='a', header=False, )
+
+        elif job == 1:
+            st.subheader("diagnose report")
+
+            flag = 1
+            for i in range(len(csvframe)):
+                if str(csvframe['patientsID'][i]) == optionx:
+                    flag=0
+                    st.write(str(csvframe['report'][i]))
+
+            if flag==1:
+                st.write("The doctor did not give a diagnosis report, you can push your diagnosis.")
+
+            if flag==1 or st.checkbox("I think segmentation result is wrong", False):
+                txt = st.text_area('Enter your report', placeholder="Please input diagnose report about this patient.")
+                if st.button("Submit"):
+                    t = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+                    frame = pd.DataFrame([[optionx, txt,t,PatientID]],columns=['patientsID', 'report','Time','Doc'])
+                    frame.to_csv(recordFile, mode='a', header=False)
+
+        else:
+            st.subheader("diagnose report")
+            flag = 1
+            for i in range(len(csvframe)):
+                if str(csvframe['patientsID'][i]) == optionx:
+                    flag=0
+                    st.write(str(csvframe['report'][i]))
+
+            if flag==1:
+                st.write("The doctor did not give a diagnosis report.")
+
 
     else:
         placeholder1.empty()
