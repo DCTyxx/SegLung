@@ -12,6 +12,8 @@ from ..functions.get3DSlides import buildPdbPage
 from ..page.fixSegt import fixResult
 import time
 
+# have lots of things to do
+
 def getAllSildes(listFile,file):
     raw_imageList = []
     for i in range(0, int(len(listFile))):
