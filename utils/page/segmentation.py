@@ -282,7 +282,7 @@ def mainboard(job,nowFile,PatientID):
                     t = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
                     frame = pd.DataFrame([[optionx, txt,t,PatientID]],columns=['patientsID', 'report','Time','Doc'])
-                    frame.to_csv(recordFile, mode='a', header=False, )
+                    frame.to_csv(recordFile, mode='a', header=False,index=False )
 
         elif job == 1:
             st.subheader("diagnose report")
@@ -301,7 +301,7 @@ def mainboard(job,nowFile,PatientID):
                 if st.button("Submit"):
                     t = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
                     frame = pd.DataFrame([[optionx, txt,t,PatientID]],columns=['patientsID', 'report','Time','Doc'])
-                    frame.to_csv(recordFile, mode='a', header=False)
+                    frame.to_csv(recordFile, mode='a', header=False,index=False)
 
         else:
             st.subheader("diagnose report")
