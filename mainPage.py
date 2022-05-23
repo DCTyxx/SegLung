@@ -8,6 +8,9 @@ from utils.data.readUserList import read
 import os
 from utils.page.segmentation import mainboard
 from utils.page.pdb_page import search_PDB
+import cv2 as cv
+
+
 
 class MultiApp:
     def __init__(self):
@@ -18,6 +21,10 @@ class MultiApp:
 
     def run(self):
         nowFile = os.getcwd()
+        posterFile = os.path.join(nowFile,"poster/poster_page-0001.jpg")
+        # poster = open(posterFile,encoding='utf-8').read()
+        poster = cv.imread(posterFile)
+        poster = cv.cvtColor(poster,cv.COLOR_BGR2RGB)
 
         img = Image.open(
             r"./img/person - 192x192.png"
@@ -34,6 +41,13 @@ class MultiApp:
             uid = st.text_input(label='User ID', placeholder="Uid")
             password = st.text_input(label='Password', placeholder="password", type="password")
             st.markdown("---")
+
+        placeholder3 = st.empty()
+        with placeholder3.container():
+            st.image(poster)
+            # st.latex(poster)
+
+
 
         path = os.path.join("./UserData/userList.csv")
         passw,job,PatientsID = read(file=path, name=uid)
