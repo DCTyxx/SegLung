@@ -43,9 +43,9 @@ class MultiApp:
             st.markdown("---")
 
             st.write("Three user instances: \n ")
-            st.write("1. doctor1 who check the result about the segmentation.")
+            st.write("1. doctor1 need to check the result about the segmentation.")
             st.write("  username: xxy, password: 123456. \n ")
-            st.write("2. doctor2 who only can see the check result from doctor1.")
+            st.write("2. doctor2 who only can see the check result that is by doctor1.")
             st.write("  username: jyl, password: 123456. \n")
             st.write("3. patients who only can see themself segmentation result.")
             st.write("  username: zws, password: 123456.")
