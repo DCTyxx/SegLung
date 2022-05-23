@@ -53,6 +53,7 @@ class MultiApp:
         passw,job,PatientsID = read(file=path, name=uid)
         if passw == password:
             placeholder.empty()
+            placeholder3.empty()
             st.sidebar.markdown('## Wellcome Back ' + PatientsID + ' , Have a Nice Day!')
             st.sidebar.markdown("---")
             st.markdown("## Main Menu")
